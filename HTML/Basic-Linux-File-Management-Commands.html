@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../CSS/building-a-bussiness-environment-write-up.css" rel="stylesheet">
+
+    <title>Projects</title>
+
+</head>
+<body style="background-color: rgb(5, 1, 65);">
+
+<body>
+
+    <div class="header"> 
+        <div class="inner_header"> 
+            <div class="logo_container">
+                <h1> Darrius <strong>Magee</strong> </h1> 
+            </div>             
+                    <ul class="navigation">
+                <a href="../index.html" ><li class="hover-link">Home</li></a>
+                <a href="../HTML/Projects.html"><li class="hover-link">Projects</li></a>
+                <a href="../HTML/Write-Ups.html"><li class="hover-link">Write-Ups</li></a>
+                <a href="../HTML/About.html"><li class="hover-link">About</li></a>
+            </ul>
+        </div>
+    </div>
+
+<!-------------------------------Header-------------------------------->
+
+    <div class="project_layout" style="display: grid;
+         margin-left: 250px;
+         margin-right: 250px;
+         grid-template-columns: 1fr;
+         padding-bottom: 150px;">
+
+        <div class="write-up-header">
+            <h1> File linking in Linux </h1>
+        </div>
+
+        <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Basic Linux File Management Commands.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1> Objective </h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This is a useful tip for system admins we will examine local configuration files to get an idea of user accounts, group accounts, security settings,
+            and other basic configuration information on your systems. 
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will display and search a log file using various commands. We will also create a directory structure and populate with files using the touch command.
+        </p>
+    </div>
+
+    <div class="write-up-header">
+        <h1> Stage 1: Displaying only the first and last lines of a log</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Before we do anything we first want to switch into a user whos log we want to view. In this case we will view "user1"s logs.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: su - user1 (switches you to user1) whoami (shows what user you currently are)
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.1.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            We will read the dnf.log file located in /var/log. The dnf.log contains package information, timestamps. repository information, error messages and more.
+             This file contains a long list of logs, to long to just read and find what you want with just your eyes. We can view the first few lines of any files
+              with the "head" command.
+        </p>
+    </div>
+    
+
+    <div class="write-up-text">
+        <p>
+            Run: head /var/log/dnf.log 
+        </p>
+    </div>
+
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.2.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            As you see we get a few lines of logs, mainly just debugging information. We can also review the most recent logs or logs at the 
+            end by using the "tail" command.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: tail /var/log/dnf.log
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.3.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            At the end of user1's logs we see that the debugging proccess has completed.
+        </p>
+    </div>
+
+  
+
+    <div class="write-up-header">
+        <h1>Stage 2: Use filter commands to make log analysis easier</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            The grep command matches strings of characters, making it useful to search for specific items in a 
+            long list. We will be viewing user2's logs for this example.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: cat /var/log/dnf.log | grep "timer"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.4.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            As you see any log that contains the string "timer" will populate our terminal. You can also add the " -i " switch 
+            for grep to remove case sensitivity.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: cat /var/log/dnf.log | grep -i "fail"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.5.png"> </div>
+
+
+    <div class="write-up-text">
+        <p>
+            As you can see even any string with "fail" are populated. It is a good habbit to add the " -i " switch when grepping 
+            because you may miss something you didn't know existed.
+        </p>
+    </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage 3: Manipulate files and directories</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will go over copying files, we will be using user1's account. We will copy the /opt/files to our home directory.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: cp -R /opt/files ~ (the -R switch copies everything in the folder files, subfolders, etc. The ~ is the home directory)
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.6.png"> </div>
+    
+      <!-- I was so high making this --> 
+
+    <div class="write-up-text">
+        <p>
+            We then moved into the files location and viewed it contents. It is good practice to type ls after every movement, or manipulation 
+            of files to make sure it is doing what you told it to do.
+        </p>
+    </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage 4: Create a new directory and move specifics files into it</h1>
+    </div>
+
+
+    <div class="write-up-text">
+        <p>
+            You can create new directories and able to copy files into them using a terminal. To make a directory use the "mkdir" command.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: mkdir documents
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.7.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Now we will copy the contents that are in the "file" directory into the "documents" directory.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: cp * ../documents/ (copies everything in the directory you are currently in and place them into the documents folder)
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.8.png"> </div>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            You can also create blank files by using the "touch" command.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: touch File1.txt
+        </p>
+    </div>
+
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.9.5.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage 5: Deleting the files directory and its contents as it is no longer needed</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            When deleting a directory we use rmdir but, this will not work if the directory has files inside.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: rm -rf files
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            The -r switch deletes everything the -f switch deletes without a confirmation BECAREFUL using this switch.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Basic Linux File Management Commands/Pt.9.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Fin.
+        </p>
+    </div>
+
+  
+    </body>
+</html>

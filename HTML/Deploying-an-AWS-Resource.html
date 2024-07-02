@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../CSS/cloud-environment-costs.css" rel="stylesheet">
+
+    <title>Projects</title>
+
+</head>
+<body style="background-color: rgb(2, 2, 2);">
+
+<body>
+
+    <div class="header"> 
+        <div class="inner_header"> 
+            <div class="logo_container">
+                <h1> Darrius <strong>Magee</strong> </h1> 
+            </div>             
+                    <ul class="navigation">
+                <a href="../index.html" ><li class="hover-link">Home</li></a>
+                <a href="../HTML/Projects.html"><li class="hover-link">Projects</li></a>
+                <a href="../HTML/Write-Ups.html"><li class="hover-link">Write-Ups</li></a>
+                <a href="../HTML/About.html"><li class="hover-link">About</li></a>
+            </ul>
+        </div>
+    </div>
+
+<!-------------------------------Header-------------------------------->
+
+    <div class="project_layout" style="display: grid;
+         margin-left: 250px;
+         margin-right: 250px;
+         grid-template-columns: 1fr;
+         padding-bottom: 150px;">
+
+        <div class="write-up-header">
+            <h1> Deploying an AWS Resource </h1>
+        </div>
+
+        <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/Deploying an AWS Resource.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Objective</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will create a proof of concept virtualization deployment. We will explore the AWS Console interface, create a 
+            resource group to manage a departments AWS resources, and lastly we will configure and scale a virtual machine.
+        </p>
+    </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage 1: Access the AWS Console</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This is you default AWS homepage after you log in of course.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/1.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            In the top right corner of the AWS console you can select what region you would like to be in.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/2.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage 2: Access Common AWS Services</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will continue to explore AWS and check out what services they have.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/3.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Click on "All Services"
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This displays and lists all of the services in alphabetical order.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/4.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Click on "Compute" the select EC2"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/5.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Here is the EC2 Dashboard, the HUB in which you will change all of your 
+            EC2 settings. EC2 is where you will setup virtualization/cloud computing 
+            services. It is the Land you will be renting.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/6.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Select "Instances"
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            The instance is the virtual PC you will create, this will be your workstation 
+            or box so to say. Or even the houses you are putting on the rented land.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/7.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Here is you Instances page where you will find what services are running, stopped, 
+            etc. To return to the main page select "EC2 Dashboard"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/8.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Type in "compute" in the searchbar above and select "Elastic Container 
+            Service". If it does not show up select "See all results" and proceed.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/9.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/10.png"> </div>
+
+
+    <div class="write-up-text">
+        <p>
+            Here is the Container Service page / Cluster page.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Select "Create cluster"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/11.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Here is where we can create and modify clusters obviously but what does 
+            that mean? Clusters are used to group Instances or our houses together. 
+            I guess in real estate terms this is the neighborhood? Just scroll 
+            down to the bottom and click cancel.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/12.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/13.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            ECS is a fully managed orchestration service for containers. Fargate 
+            is a serverless pay-as-you-go compute engine that allows you to 
+            focus on building apps without managing servers. This leverages a 
+            serverkess archutectyre for resources on your container.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/14.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            At the top click the AWS logo or tpye "home" to return to the dashboard.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/15.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage 3: Create a Default Virtual Private Cloud (VPC)</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            VPC's is where we will create a virtual network to connect our instances, 
+            and other things.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/16.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Now go right back to the top we gotta get the reps in! Type in "VPC" and click VPC.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/17.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Here is our VPC dashboard.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Click "Your VPC's" on the left.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/18.png"> </div>
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/19.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Then select "Actions" ---&#62; "Create default VPC"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/20.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Select "Create default VPC" again the REPS!!!
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/21.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Congrats it has been created! Just select "Your VPC's" to check it out.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/22.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            If you need to you may hit the pen button and name you VPC.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/23.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/24.png"> </div>
+
+   
+    <div class="write-up-header">
+        <h1>Stage 4: Deploy an EC2 Instance</h1>
+    </div>
+
+
+    <div class="write-up-text">
+        <p>
+            Now we will create an EC2 instane. Head over to the EC2 Dashboard and click 
+            "Launch Instance".
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/25.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            This is where we will customize our virtual machine. Kinda like in the 
+            first tutorial. In the box below you can name your instance whatever 
+            you want. On the right of the box hit "Add additional tags"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/26.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            We will sign a Environment tag to our instance and call it Dev.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/28.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Moving on along we are given the option to select our operating system.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/29.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Scrolling down you are given the option to change the instance type. 
+            Meaning this is where you select how much power you virtual machine 
+            will have. Just remember with great power comes great expenses.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/30.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            You will notice a key pair login, this is where you can create private 
+            and public keys for your machine. Highly RECOMMEND selecting something!
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/31.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/32.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Now we can modify our network settings, firewall settings, etc.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Select "edit".
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/33.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Here is the network page below we will change the subnet region to one that 
+            is closest to us, for better connectivity.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/34.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/35.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            !i!i!i!i Note i!i!i!i!i that the machines storage is at the very end. We are done 
+            configuring our Instance we will now Launch It!.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/36.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Select "Instances"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/37.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            And wallah! The virtual machine is running nice and healthy.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/38.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage 5: Manage EC2 Instance State</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will now manage the state of our EC2 instance.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Check the box next to the instance you just created.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/39.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Below you can see information about the instance. Note the launch time.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/40.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Right click your instance and reboot it and check the launch time again.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/41.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            You will notice the time does not change but, if you stop it...
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/42.png"> </div>
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/43.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            and start.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/44.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            You will notice that the launch time has changed.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/45.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage 6: Scale an Existing EC2 Instance</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will now scale our instance. Right Click and select "Stop Instance"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/46.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Now Right Click ---&#62;  Instance Settings ---&#62;  Change Instance Type.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/47.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Swap to which ever size you need and procceed.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/48.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            You will notice that the instance type has successfully changed.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Deploying a AWS Resource/49.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Fin.
+        </p>
+    </div>
+
+   
+  
+    </body>
+</html>

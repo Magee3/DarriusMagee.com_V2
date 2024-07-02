@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    display: block;
+    
+    background-color: rgb(0, 0, 0);
+}
+
+.inner_header {
+    width: 1000px;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(0, 0, 0);
+}
+
+.logo_container {
+    height: 100%;
+    display: table;
+    float: left;
+    margin-right: 200px;
+    
+}
+
+.logo_container  h1{
+    height: 100%;
+    color: rgb(255, 255, 255);
+    display: table-cell;
+    vertical-align: middle;
+    font-family: 'Ariel';
+    font-size: 32 px;
+    font-weight: 100;
+}
+
+.logo_container h1 span{
+    font-weight: 800;
+
+}
+
+.navigation a{
+    height: 100%;
+    display: table;
+    padding: 0px 20px;
+    color: white;
+    float: left;
+    margin-top: 20px;
+}
+
+.navigation a li{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.navigation {
+    float: right;
+    height: 100%;
+}
+
+.navigation a li {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    color: white;
+    font-size: 20px;
+    font-family: Arial;
+}
+
+.hover-link:hover {
+    color: rgb(247, 180, 36);
+    transition: .15s;
+
+}
+
+/* Header section */
+
+.biotitle {
+    color: white;
+    font-size: 50px;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+.bio {
+    color: white;
+    font-size: 30px;
+    width: 900px;
+    margin-left: 100px;
+}
+
+.p1 {
+    margin-top: 5px;
+}
+
+.p2 {
+    margin-top: 5px;
+}
+
+.p3 {
+    margin-top: 5px;
+}
+
+.p4 {
+    margin-top: 5px;
+}
+
+.p5 {
+    margin-top: 5px;
+}
+
+.p6 {
+    margin-top: 5px;
+}
+
+.p7 {
+    margin-top: 5px;
+}
+
+.p8 {
+    margin-top: 5px;
+}
+
+.p9 {
+    margin-top: 5px;
+}
+
+.p10 {
+    margin-top: 5px;
+}
+
+
+.bio_linkedin {
+    float: right;
+    margin-left: 600px;
+}

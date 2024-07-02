@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../CSS/building-a-bussiness-environment-write-up.css" rel="stylesheet">
+
+    <title>Projects</title>
+
+</head>
+<body style="background-color: rgb(5, 1, 65);">
+
+<body>
+
+    <div class="header"> 
+        <div class="inner_header"> 
+            <div class="logo_container">
+                <h1> Darrius <strong>Magee</strong> </h1> 
+            </div>             
+                    <ul class="navigation">
+                <a href="../index.html" ><li class="hover-link">Home</li></a>
+                <a href="../HTML/Projects.html"><li class="hover-link">Projects</li></a>
+                <a href="../HTML/Write-Ups.html"><li class="hover-link">Write-Ups</li></a>
+                <a href="../HTML/About.html"><li class="hover-link">About</li></a>
+            </ul>
+        </div>
+    </div>
+
+     <!-------------------------------Header-------------------------------->
+
+     <div class="project_layout" style="display: grid;
+    margin-left: 250px;
+    margin-right: 250px;
+    grid-template-columns: 1fr;
+    padding-bottom: 150px;">
+
+    <div class="write-up-header">
+        <h1>Building-a-Small-Business-Environment</h1>
+    </div>
+    <div class="project_images"> <img src="../images/Thumbnails/business_thumbnail.png"> </div>
+
+    <div class="write-up-text">
+        <p>The MSP I work for has been hired to build a small business environment.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>The client has requested the following:</p>
+    </div>
+
+    <div class="write-up-text-bullet">
+        <p> &#8226; a secure network </p>
+    </div>
+
+    <div class="write-up-text-bullet">
+        <p> &#8226; an internal Windows Domain </p>
+    </div>
+
+    <div class="write-up-text-bullet">
+        <p>&#8226; a public webserver</p>
+    </div>
+
+    <div class="write-up-text-bullet">
+        <p>&#8226; a public FTP server</p>
+    </div>
+
+    <div class="write-up-text-bullet">
+        <p>&#8226; a LAN network on 10.128.0.0/24</p>
+    </div>
+
+    <div class="write-up-text-bullet">
+        <p>&#8226; a DMZ network on 10.128.10.0/24</p>
+    </div>
+
+    <div class="write-up-text-bullet">
+        <p>&#8226; a GUEST network on 10.128.99.0/24</p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage1 : Network Setup : Topology</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p> Our topology will start with the WAN-CLOUD a.k.a. the internet, our WAN-SWITCH, our FortiGate which is our firewall, a LAN-SWITCH, DMZ-SWITCH, and our Windows 10 box. </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/TopologyOpen1.png"> </div>
+
+    <div class="write-up-text">
+        <p>Next we will plug everything in using a RJ-45 cable. Note that with firewalls different ports offer different services. For our FortiGate1
+         port 1 is for the WAN, port 2 is for LAN,
+        port 3 is for guests, and port 4 is for the DMZ. Switches do not have the same specifications.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/TopologyFirewall.png"> </div>
+
+    <div class="write-up-text">
+        <p> With everything plugged in out topology should look like this: </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Topology Pt1 End.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage1 : Network Setup : Configuring the LAN Network</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Open up the switch console and log in using the default credentials. username = admin password = none
+            <p> After loging in you will be prompted to create your own password.</p>
+            <p> Now we will configure the LAN-Switches settings that we were given to by our senior engineer. Run the following commands:</p>      
+    </div>
+
+    <div class="write-up-text">
+        <p> conf sys int edit port2 set allowaccess ping http https ssh set ip 10.128.0.1/24 end</p>     
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/LAN settings.png"> </div>
+
+    <div class="write-up-text">
+        <p>verify that your configuration is correct by running:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>show sys int port2</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>We will now enable DHCP and the LAN Network, our scope is from 10.128.0.[100-199]. we will run:</p>
+        <p>conf sys dhcp server edit 1 set default-gateway 10.128.0.1 set netmask 255.255.255.0 set interface port2 config ip-range </p>
+        <p>edit 1 set start-ip 10.128.0.100 set end-ip 10.128.0.199 next end next end</p>
+        <p>Verify that the configuration is correct by running:</p>
+    </div>
+    
+    <div class="write-up-text">
+        <p>show sys dhcp server 1</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/DHCP check.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage1 : Network Setup : Add a Win10 workstation</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>WAfter spinning up the Windows virtual machine and logging in we will open the command prompt and make sure that our ip, gateway, and DHCP servers are correct by running:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>ipconfig /all</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/ipconfigcheck.png"> </div>
+
+    <div class="write-up-text">
+        <p>along with the check we will ping: LAN - 10.128.0.1 WAN - 8.8.8.8 DNS - google.com</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Our results are that we can ping the LAN with no problem. The WAN and DNS are show as failed or timed out since we haven't configured the settings.</p>
+    </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage1 : Network Setup : Connect to the firewall GUI</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Next we will log into our firewallwall GUI by typing its address into our browser of choice. We will use the same credentials we used to setup our firewall.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Go into the system settings and make changes according to your project. We changed hostnames, timezones, local interfaces. interface lists, idle timeout, and aut 
+            file system check. Back up the configuration and reboot the firewall.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Stage1 : Network Setup : Complete the network setup</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>I will not go into too much detail in all the configurations we made with the firewall so I will sum it up. We reconnected to the gui. Configured the WAN, LAN, GUEST, and 
+            DMZ ports. Enabled DNS, Configured the firewall system DNS. Configured Network DNS for LAN, GUEST, and DMZ, Created service objects for LAN, and DMZ. Then we 
+            configured firewall rulesfor all the ports. And finally we backed up the configuration.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>After all the configurations we re-ran the ping for WAN, and DNS. The WAN came back as successful but the DNS did not. After troubleshooting we found that the configurations 
+            were correct, all we had to do was re-run ipconfig /release and ipconfig /renew. Everything worked properly and we were able to connect to the cloud.</p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage2 : Domain Setup : Topology</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>For stage to we will add and setup our Domain controller.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/AddingDomainTopology.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage2 : Domain Setup : Prepare a Win2012r2 server</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>We log into the Win server using default credentials and changing it to something more secured. We will use 
+            the following setup our network adapter.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>ip address: 10.128.0.10</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>subnet mask: 255.255.255.0</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>default gateway: 10.128.0.1</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>DNS1: 127.0.0.1</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>DNS2: 10.128.0.1</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>To change adapter settings go into control panel &#8209;&#8209;> Network and Internet &#8209;&#8209;> Network and Sharing Center &#8209;&#8209;>
+             Change adapter settings &#8209;&#8209;> Right click your adapter and select properties &#8209;&#8209;> IPv4 settings.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>The final window should look something like this:</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/DCproperties.png"> </div>
+
+    <div class="write-up-text">
+        <p>To test our connections we will ping the following targets: LAN-SWITCH: 10.128.0.1 WAN: 8.8.8.8 DNS: google.com</p>
+    </div>
+  
+    <div class="write-up-text">
+        <p>All the pings have came back successfull we will sync our time with the switches. Right click the time on the bottom right of the task bar and select Adjust Date and Time. Change the time zone to the same as the switch. 
+            Afterwards click internet time and type in the switches ip and hit update now.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/sync time.png"> </div>
+
+    <div class="write-up-text">
+        <p>It may not work the first time give it about 3-5 tries before troubleshooting.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Next we will change our hostname</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>In server manage go into local servers and click the computer name. change the computer description
+             to: DC hit apply then change.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/hostname change.png"> </div>
+    
+
+    <div class="write-up-header">
+        <h1>Stage2 : Domain Setup : Install Active Directory</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Installing active directory to a Windows web server is really easy. 
+        Go into server manager &#8209;&#8209;> manage &#8209;&#8209;> Add roles and features &#8209;&#8209;> Active Directory</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/011814_0709_buildingyou12.png"> </div>
+
+    <div class="write-up-text">
+        <p>Keep the default settings until you reach the server roles tab. Check "Active Directory Domain Services" and continue with the installation. After installation has finished there 
+            should be a notification in the server manager asking you to promote the server to the Domain Controller select "yes". If you do not get the notification you may have to refresh the page.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/adname.png"> </div>
+
+    <div class="write-up-text">
+        <p>Keep the default settings until you reach the server roles tab. Check "Active Directory Domain Services" and continue with the installation. After installation has finished there 
+            should be a notification in the server manager asking you to promote the server to the Domain Controller select "yes". If you do not get the notification you may have to refresh the page.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Select the "Add a new forest" option and name your root folder</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Select "Next" Enter a password and finish the installation. When the installation is finish reboot the device.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/adpass.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage2 : Domain Setup : Create new AD users</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>We created users for our Domain. This allows people who has the credentials to log into a computer in the business environment. 
+            Our naming format is as follows:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>We will create a admin and user account for Ashley Williams. We will take the first name initial and attatch it to the last name followed by a u- 
+            for user and a a- for admin account.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>a-awilliams</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>u-awilliams</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/AD add user.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/users tab.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/user cred.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/change pass.png"> </div>
+
+    <div class="write-up-text">
+        <p>For admin accounts you must add them to the "Domain Admins" group to be able to make administrator 
+            changes and installations. Normal users will not have the permisions to change, and install files.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/add group.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/domain admin group.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/domain admin check.png"> </div>
+
+    <div class="write-up-text">
+        <p>Be sure to check names, windows is Case Sensitive.</p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage2 : Domain Setup : Prepare Win10 to join the domain</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>In order to prep our windows workstation to join our DC server we must first name the windows 10 pc so we can 
+            identify it.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>under control panel go to &#8209;&#8209;> System &#8209;&#8209;> Change Settings under the system properties we changed the
+             name of our workstation.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/Change PC name.png"> </div>
+
+    <div class="write-up-text">
+        <p>We then went into the our Win10 workstation and changed our IP settings. Our IP address will be obtained automatically 
+            through our DC server, and our DNS settings are pointed to our LAN-SWITCH and our DC server.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Our last step is to sync our time with our DC. We changed the time zone to the same time as our DC, then under the Internet 
+            Time settings we type in our full Domain Name.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/Domain Time Sync.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage2 : Domain Setup : Join Win10 to the widgets.localdomain domain</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>To join the domain go back into the settings in which we changed the computer name to win10. Click the domain box and type in the 
+            domain name. Afterwards you will get a prompt to login. Use an admin account that you have created.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/joining the widgets domain.png"> </div>
+
+    <div class="write-up-text">
+        <p>Logout of the windows10 workstation and log back in using a user, or admin account. Our station has been succesfully linked to 
+            our Domain Controller.</p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage3 : IIS Setup : Topology</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Next we will create a webserver. We will set the device up using IIS (Internet Information Service), 
+            it will be connected to our LAN-SWITCH.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/IIS Topology.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage3 : IIS Setup : Prepare a Win2012r2 server</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>We will rename the servers hostname to: iis match the subnet mask with the other devices. Give the device a static ip address. 
+            Point the default gateway to the LAN-SWITCH. The DNS will be pointed into the DC and LAN-SWITCH. Synchronize the time with the 
+            other devices and join the Domain just like we did for the workstation.</p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage3 : IIS Setup : Install the IIS role</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>In server manager select # Add roles and features. Select Role Based Installation and hit next. Select the server 
+            in which you want to install IIS on. Select IIS Webserver to install and continues with the installation.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/iis configure setup.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/server pool.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/webserver iis (2).jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/add features iis.jpg"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage3 : IIS Setup : Setup a test webpage on IIS</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>We will create a test html file to see if our webserver is functioning properly. Here is a simple HTML code we used 
+            to test the webserver:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>&lt;html&gt;</p>
+            <p> &lt;head&gt;</p>
+                <p> &lt;title&gt;IIS test validation website&lt;/title&gt;</p>
+                    <p>&lt;/head&gt;</p>
+                        <p> &lt;body&gt;</p>
+                            <p>  &lt;p&gt;test website validation completed&lt;/p&gt;</p>
+                                <p> &lt;/body&gt;</p>
+                                    <p>  &lt;/html&gt;</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Save the file as "test.html" ! Make sure that the file is not a notepad file that it is actually a HTML file. Save the 
+            file to this location " c:\inetpub\wwwroot\test.html "</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>You can test to see if your browser can open the file on the local iis server by typing "http://localhost/test.html"
+             in the browser.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>You can test to see if other workstations in the business environment can access the file by loging into a workstation and
+             typing http://iis.widgets.localdomain/test.html into the browser.</p>
+    </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage4 : LAMP Setup : Topology</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Now we will setup a LAMP webserver on Unbuntu server on the DMZ-Network"</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/LAMP ubuntu topology.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage4 : LAMP Setup : Prepare a Ubuntu server</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>We gave our Ubuntu server a static ip of 10.128.10.80 same as our iis server but on another network. Our subnet 
+            mask will be the same. the default gateway will point towards the DC. our DNS settings will point towards the DC and our DMZ-SWITCH.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ubuntu settings.png"> </div>
+
+    <div class="write-up-text">
+        <p>We will now edit our host files. This takes root privileges run: sudo -i then run: nano /etc/hosts to edit the host files.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/i am root.png"> </div>
+
+    <div class="write-up-text">
+        <p>We will now add in our local hosts</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/local host n domain.png"> </div>
+
+    <div class="write-up-text">
+        <p>Save and exit.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>We will now change the servers hostname run:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>hostnamectl set-hostname www</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>hostnamectl</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>This sets how hostname as www and checks to make sure we set our hostname correctly right.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Lastly we run our package updates on the server. This may take a few minutes to a hour. Run:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>apt update -y</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>apt upgrade -y</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>apt dist-upgrade -y</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>apt autoremove -y</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>apt autoclean -y</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>systemctl reboot</p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage4 : LAMP Setup : Install DokuWiki</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Im not going to lie this is a long step so imma just give you the code to what we did without to much explaining lmaoo. 
+            ALSO you must be root for this section.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>We ran this command to install dokuwiki</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>apt install php php-gd php-xml php-json -y</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>systemctl enable --now apache2</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>ufw allow Apache</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>wget https://download.dokuwiki.org/src/dokuwiki/dokuwiki-stable.tgz</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>mkdir /var/www/html/dokuwiki</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>tar xzf dokuwiki-stable.tgz -C /var/www/html/dokuwiki/ --strip-components=1</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Basically the code is installing neccesary packages first, enabling a service apache2, allowing apache through the firewall, 
+            downloading dokuwiki, setting up a folder for dokuwiki, then extracting the contents into the folder.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>We than ran:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>nano /etc/apache2/sites-available/dokuwiki.conf</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>This will be our configuration file for dokuwiki.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Our config file looks like this:</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/config file.png"> </div>
+
+    <div class="write-up-text">
+        <p>These commands finishes and solidifies the configuration.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>cp /var/www/html/dokuwiki/.htaccess{.dist,}</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>chown -R www-data:www-data /var/www/html/dokuwiki</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>apache2ctl -t</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>a2dissite 000-default.conf</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>a2ensite dokuwiki.conf</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>systemctl reload apache2</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Now you want to log into the DC server and in server manager open the DNS settings. Under the "Forward Lookup Zones" 
+            add a new host(A) record to the domain:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>name = www ip address = 10.128.10.80 create associated pointer (PTR) record = unchecked add host</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>You can now run in the browser of your choice:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>http://www.widgets.localdomain/install.php</p>
+    </div>
+    
+
+    <div class="write-up-header">
+        <h1>Stage4 : LAMP Setup : Configure DokuWiki</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Configure Dokuwiki to your liking. Afterwards rename the dokuwiki file run:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>mv /var/www/html/dokuwiki/install.php /var/www/html/dokuwiki/install.php.removed</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Then onto the browser enter:</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>http://www.widgets.localdomain/</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>log in using the credentials you used for the setup and you will be brought to a page with a few options. 
+            Select "Create this page".</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/dokuwiki create page.png"> </div>
+
+    <div class="write-up-text">
+        <p>for our page we documented each node with its IP, FQDN, hostname, a-records, what ports they are plugged into,
+             and if they are static or dhcp connected.</p>
+    </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage4 : LAMP Setup : VIP setup</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>We will now make this page visible to everyone on the WAP. Log into the firewall gui and create a new virtual ip.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/virtual ip.png"> </div>
+
+    <div class="write-up-text">
+        <p>Configure the firewall to your liking but make sure the ip matches the iis and www servers, and select you interface to WAN settings.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Note the WAN IP of the firewall will be dynamic and may change from time to time. In the firewall console run: show sys int
+             (space) !!!! hold shift and the ? and it will give you the public firewall address.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/port1 address.png"> </div>
+
+    <div class="write-up-text">
+        <p>With any computer over the WAN type in the ip of the WAN into the browser and the dokuwiki page with all the network information will pop up.</p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage5 : FTP Setup : Topology</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Last server we will add will be the FTP server. It will be attatched to the DMZ-SWITCH. This will allows users on the net
+            to transfer files.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/stage 5 ftp topology.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage5 : FTP Setup : Install the FTP service</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>Log into the FTP server using the admin credentials you have created.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>In Server Manager go to Manage &#8209;&#8209;> Add Roles and Features &#8209;&#8209;> Role-based Option and hit Next.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/SeverManager FTP.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ServerManager RoleBased.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>Select the server In which you want to install on.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/serverselection.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>Select "Webserver (IIS)" and Add Features hit "Next" until you reach the Web Server Role section.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/iiswebserverselect.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/webserverrole.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>Check the FTP Services to install the packages.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/FTP Services.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>Install and Restart the station.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>Now open "Internet Information Service".</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/IIS.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/iis2.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>In your C: Drive create a FTP folder and place in some content. We are doing this to ensure other workstations can access our FTP server.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ftpfile.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ftpcontent.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>Right Click the Server in the IIS manager and select "Add FTP Site"</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/addftpsite.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>Enter a server name of your choice and direct the file path to the FTP folder we made in the C: drive.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ftpsitepath.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/binding ssl.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/specific users.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>We now switch over to the Domain Controller. Under Server Manager access the "Active Directory Users and Computers" tab. Open the forest and right underneath 
+            "Users" Add a new folder a name it "FTP" to group users. We will then add all accounts and group them into the FTP group so everyone has access to the files.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ftp access.JPG"> </div>
+
+    <div class="write-up-text">
+        <p>You can test the FTP server by typing ftp//ftp.widgets.localdomain or the FTP's IP. You will be given a prompt. Login using your admin credentials.</p>
+    </div>
+
+    <div class="write-up-text">
+        <p>You will then be directed to the FTP folder.</p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ftp login.jpg"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/business environment/ftp files url.jpg"> </div>
+
+    <div class="write-up-text">
+        <p>Lastly we added the A records for our FTP server. We also changed the firewall settings on inbound to allow connections over port 21 over domain, private, and public networks.</p>
+    </div>
+
+    </div>
+
+<body>
+
+<html>

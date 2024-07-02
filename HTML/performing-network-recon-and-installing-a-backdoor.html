@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../CSS/building-a-bussiness-environment-write-up.css" rel="stylesheet">
+
+    <title>Projects</title>
+
+</head>
+<body style="background-color: rgb(5, 1, 65);">
+
+<body>
+
+    <div class="header"> 
+        <div class="inner_header"> 
+            <div class="logo_container">
+                <h1> Darrius <strong>Magee</strong> </h1> 
+            </div>             
+                    <ul class="navigation">
+                <a href="../index.html" ><li class="hover-link">Home</li></a>
+                <a href="../HTML/Projects.html"><li class="hover-link">Projects</li></a>
+                <a href="../HTML/Write-Ups.html"><li class="hover-link">Write-Ups</li></a>
+                <a href="../HTML/About.html"><li class="hover-link">About</li></a>
+            </ul>
+        </div>
+    </div>
+
+<!-------------------------------Header-------------------------------->
+
+    <div class="project_layout" style="display: grid;
+         margin-left: 250px;
+         margin-right: 250px;
+         grid-template-columns: 1fr;
+         padding-bottom: 150px;">
+
+        <div class="write-up-header">
+            <h1> Performing Network Recon and Installing A Backdoor</h1>
+        </div>
+
+        <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/Performing Network Recon and Installing A Backdoor.png"> </div>
+
+    <div class="write-up-text">
+        <p> You will begin by investigating the network as if you were unfamiliar with it. You will use various 
+            tools to acquire and document the layout. You will then specifically investigate a web server. Finally, 
+            you'll participate in a test security features as related to malware that installs a remote backdoor. You will close the 
+            backdoor at the end of the exercise.
+        </p>
+    </div>
+
+
+    <div class="write-up-header">
+        <h1>Discovering The Network</h1>
+    </div>
+
+
+    <div class="write-up-text">
+        <p> 
+            Reconnaissance, often referred to as "recon," is a critical phase in cybersecurity that involves gathering 
+            information about a target system or network. It plays a vital role in understanding the vulnerabilities, 
+            weaknesses, and potential attack vectors that adversaries might exploit. It is also the first step in the
+            MITRE ATT&CK framework.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            Our kali machine is on the network we are performing recon on. We are gathering IP's of all the devices including
+            our own. There are multiple ways to gather this information just like a math problem. Personally my goal is to
+            gather all the information without having to ask or move from my desk. So lets see what we can do.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            ifconfig
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-2.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            Our machines IP is 10.1.0.192
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            We will now grab the IP's from all the devices on the Network. Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            nmap 10.1.0.0/24
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-3.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-4.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            We are given Domain Names of devices, a list of ports, IP's, and MAC addresses.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            For devices that are still questionable to us we can add in the aggressive switch "-A" to give us more details about the node.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-6.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            We are given the same information with a little bit of extra such as Kernel info, OS version, and more.
+        </p>
+    </div>
+
+    <div class="write-up-header">
+        <h1> Gathering Info On The Web Server </h1>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            We suspect that our MS1 maybe the webserver due to the types of ports that are open. We will further investigate.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            nslookup 10.1.0.2
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            We are looking for the FQDN
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-8.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            FQDN: MS1.corp.515support.com
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            We will attempt to connect to the HTTP server by using cURL Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            curl -s -I 10.1.0.2
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-9.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            We are shown that MS1 is a webserver using Microsoft IIS 10
+        </p>
+    </div>
+
+    <div class="write-up-header">
+        <h1> Configure The Web Server For Authentication </h1>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           In our MS1 Workstation we go into our IIS Manager and ensure Basic Authentication is on and everything else is disabled.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-10.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           Now we will capture packets using tcpdump on the webserver. tcpdump can only capture packets, we will use Wireshark to read and analyze the packets.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           tcpdump -vv dst 10.1.0.2 and port www -w auth.txt
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/chopped security 1-12.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           Go into a browser of your choice and open the webserver by typing 10.1.0.2 into the url.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-13.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           For testing purposes enter the wrong credentials.
+        </p>
+    </div>
+
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-14.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-15.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           Press <strong>CTRL+C</strong> to stop the tcpdump
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           We will now open up Wireshark. Open the file that was created with tcpdump. (auth.txt)
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-16.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           Select a packet that contains "GET / HTTP" and expand the "Hypertext Transfer Protocol"
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-17.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-18.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           Expand the Authorization tab.
+        </p>
+    </div>
+   
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-19.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           Since HHTP is unsecured we were able to capture and analyze the packets using Wireshark and tcpdump. We can see the credentials that were attempted
+           in broad daylight. 515support\pentester as the username and dr0w$$ap as the password.
+        </p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Install Malware</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           First we will move into our MS1 web server environment and disable the firewall using windows Powershell. Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           Set-MpPreference -DisableRealTimeMonitoring $True
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-38.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           We now load up our malware on dvd and install it. There will be no yes or no or visual indication that the malware has been succesfully installed.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           Open up task manager to find any suspicious programs running.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-39.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-40.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           ncat (32 bit) is our backdoor that is running. Lets see if it is operating how it should be. Switch back over to the kali workstation.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-41.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+           Our malware is operating on port 4450/tcp and is currently open. We can move into loging into our backdoor.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           On another workstation we open putty and connect to the backdoor. Use IP 10.1.0.2, on Port 4450 using a RAW connection.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-42.png"> </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-43.png"> </div>
+
+
+    <div class="write-up-text">
+        <p> 
+        We have succesfully accessed our backdoor. It is now time to add a user account and assign it to a group.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+           net user /add mall Pa$$w0rd
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            net localgroup administrators mal /add
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            This will create a new user on the net with administrator priveleges. 
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-45.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Removing The Malware</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p> 
+            We will now move into removing the malware. We''ll first start by opening up "Task Manager" and killing the process.
+        </p>
+    </div>
+
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-46.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            Next delete the "ini" file. It has all the contains the configurations for the malware.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-47.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            Open up the "Windows Firewall with Advanced Security" and look for any suspicious Inbound Rules. The Service Port looks suspicious to us. We open the
+            rules and move into the "Protocols and Ports" to see if it is dealing with the same port the malware is.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-49.png"> </div>
+
+    <div class="write-up-text">
+        <p> 
+            We verify that this is the malware rule. The last step is to disable the rule.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Performing Network Reconnaissance and Vulnerability Scanning/cropped security 1-48.png"> </div>
+
+
+    <div class="write-up-text">
+        <p> 
+            
+In summary, this exercise involved investigating an unfamiliar network using various tools to acquire and document its layout. We then focused on investigating a 
+web server, followed by testing its security features against malware that installs a remote backdoor. Finally, we successfully closed the backdoor, effectively 
+eliminating the potential risk of unauthorized access. Through this exercise, we enhanced the network's security and emphasized the importance of proactive 
+measures to mitigate vulnerabilities.
+        </p>
+    </div>

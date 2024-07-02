@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../CSS/building-a-bussiness-environment-write-up.css" rel="stylesheet">
+
+    <title>Projects</title>
+
+</head>
+<body style="background-color: rgb(5, 1, 65);">
+
+<body>
+
+    <div class="header"> 
+        <div class="inner_header"> 
+            <div class="logo_container">
+                <h1> Darrius <strong>Magee</strong> </h1> 
+            </div>             
+                    <ul class="navigation">
+                <a href="../index.html" ><li class="hover-link">Home</li></a>
+                <a href="../HTML/Projects.html"><li class="hover-link">Projects</li></a>
+                <a href="../HTML/Write-Ups.html"><li class="hover-link">Write-Ups</li></a>
+                <a href="../HTML/About.html"><li class="hover-link">About</li></a>
+            </ul>
+        </div>
+    </div>
+
+<!-------------------------------Header-------------------------------->
+
+    <div class="project_layout" style="display: grid;
+         margin-left: 250px;
+         margin-right: 250px;
+         grid-template-columns: 1fr;
+         padding-bottom: 150px;">
+
+        <div class="write-up-header">
+            <h1> File linking in Linux </h1>
+        </div>
+
+        <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/File Linking in Linux.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1> Objective </h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will establishing a backup directory for authentication logs, generating manual symbolic links, and subsequently, 
+            making an endeavor to eliminate a specific link. Creating a backup directory for log establishes a designated folder 
+            to store copies of logs that track information, generating symbolic links specifies connections to improve 
+            organization, and we must also learn how to remove something as well as create it.
+        </p>
+    </div>
+
+    <div class="write-up-header">
+        <h1> Stage 1: Creating our Directories </h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            First things first we will create our directory in our home file. We will create a "backup" directory and a "log" 
+            directory inside of the backup directory. Your path should look like this once you're inside the directory.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            /backup/log
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/Pt.1.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            After you move into your newly made "log" directory we will create a link. We will link /var/log/dnf.log with 
+            installation.log. This will create a hard link to the auth directory. 
+        </p>
+    </div>
+    
+
+    <div class="write-up-text">
+        <p>
+            Run: 
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+           ln /var/log/dnf.log /backup/log/installation/log
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/pt.2.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Now we will check the contents of both files installation.log and dnf.log. We are checking to make sure 
+            the files have the same content. Run: tail /backup/log/installation.log tail /var/log/dnf.log
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/pt.3.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage 2: See the changes get reflected</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will create some log entries.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: dnf install -y vim
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This should fail and generate a log entry. Search for the failed attempt in the logs by running
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            tail /var/log/dnf.log | grep -i failed tail /backup/log/installation.log
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/pt.4.png"> </div>
+
+
+    <div class="write-up-text">
+        <p>
+            save the failed results into a file named "install-fail"
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: 
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            tail installation.log | grep -i failed >> install-fail
+        </p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage 3: Removing a File and Verify The Other is Still Intact</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            simply remove the installation.log file
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: 
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            rm /backup/log/installation.log
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/pt.5.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            verify that it has been removed. Read the failed installation once again to verify the file has not been 
+            tampered with.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: 
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            tail /var/log/dnf.log | grep -i failed
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/pt.6.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage 4: Creating a symbolic link</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We will change our directory to the root users directory. Once in your root directory we will create a hard link from 
+            /proc/meminfo to memory_info.txt in your home directory.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: ln /proc/meminfo memory_info.txt
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            You will get an error because hard links accorss different file systems are not allowed. You must use a symbolic link.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: 
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            ln -s /proc/meminfo memory_info.txt
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/pt.7.png"> </div>
+
+    <div class="write-up-header">
+        <h1> Stage 5: Remove an original file through link </h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Create a file with something inside in the root directory. I used "linktest"
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Then Run: ls -l
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/File Linking in Linux/pt.8.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Now removing the original file will break the link but keep the file in the /opt directory. In order to delete both 
+            files you must delete both. Hardlinks and symbolic links are like shortcuts. Hardlinks all point towards the data block 
+            on the file and a symbolic link points to a files path or location.
+        </p>
+    </div>
+
+  
+
+
+  
+    </body>
+</html>

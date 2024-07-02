@@ -1,0 +1,147 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+.header {
+    width: 100%;
+    height: 100px;
+    display: block;
+    
+    background-color: rgb(0, 0, 0);
+}
+
+.inner_header {
+    width: 1000px;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(0, 0, 0);
+}
+
+.logo_container {
+    height: 100%;
+    display: table;
+    float: left;
+    margin-right: 200px;
+    
+}
+
+.logo_container  h1{
+    height: 100%;
+    color: rgb(255, 255, 255);
+    display: table-cell;
+    vertical-align: middle;
+    font-family: 'Ariel';
+    font-size: 32 px;
+    font-weight: 100;
+}
+
+.logo_container h1 span{
+    font-weight: 800;
+
+}
+
+.navigation a{
+    height: 100%;
+    display: table;
+    padding: 0px 20px;
+    color: white;
+    float: left;
+    margin-top: 20px;
+}
+
+.navigation a li{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.navigation {
+    float: right;
+    height: 100%;
+}
+
+.navigation a li {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    color: white;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.hover-link:hover {
+  color: rgb(247, 180, 36);
+  transition: .15s;
+
+}
+
+
+/* Header section */
+
+
+.content_layout {
+    column-gap: 50px;
+    row-gap: 40px;
+}
+
+.grid-item {
+    border: 2px solid rgb(201, 201, 201);
+    padding: 5px;
+    transition: box-shadow .8s;
+  }
+
+  .grid-item:hover {
+    cursor: pointer;
+    border: 2px solid rgb(247, 180, 36);
+    padding: 5px;
+    box-shadow: 0 0 40px #faef8a;
+  }
+  
+
+   /*Grid Settings */
+
+
+  .redteam {
+    background-color: rgb(0, 0, 0);
+  }
+  
+  .redteam img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .hook {
+    margin-top: 25px;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+    width: 220px;
+  }
+  
+  .date {
+    margin-top: 15px;
+    float: right;
+    color: white;
+  }
+
+  .image_container {
+    height: 250px;
+    vertical-align: top;
+    overflow: hidden;
+  }
+
+  .image_container img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .size3:hover{
+    color: blue;
+    background-color: violet;
+  }
+  
+ 

