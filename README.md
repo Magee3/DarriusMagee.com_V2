@@ -1,2 +1,3 @@
-# testsite
- https://magee3.github.io/testsite/
+# Website
+ https://magee3.github.io/
+ www.darriusmagee.com
